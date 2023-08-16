@@ -2,24 +2,38 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <!-- Basic -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <meta name="keywords" content="hotel site" />
+        <meta name="description" content="fake reservation site" />
+        <meta name="author" content="miantama guy sebastien" />
         {% block stylesheets %}
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+            <!-- bootstrap core css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" />
+
+            <!-- fonts style -->
+            <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+            <!-- responsive style -->
+            <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
 
         {% endblock %}
 
         {% block javascripts %}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
         {% endblock %}
     </head>
     <body>
-    <div class="container">
         {% block body %}
 
         {% endblock %}
-    </div>
 
     </body>
 </html>

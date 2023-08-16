@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}reservation{% endblock %}
+    {% block stylesheets %}
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" />
+
+        <!-- fonts style -->
+        <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <!-- Bootstrap -->
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/style2.css') }}" />
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}" />
+
+    {% endblock %}
+
+    {% block javascripts %}
+
+    {% endblock %}
+
+{% block body %}
+    <div class="hero_area" style="height: 80px">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                    <a class="navbar-brand" href="{{ path('app_home') }}">
+            <span>
+              MyHotel
+            </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                            <ul class="navbar-nav  ">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_home') }}"> Home </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_planning') }}">Planning</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+
+    </div>
+
+    {{ form_start(form) }}
+    <div id="booking" class="section">
+        <div class="form-label">
+            {{ form_errors(form) }}
+        </div>
+        {{ form_row(form._token) }}
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        <form>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    {{ form_widget(form.title) }}
+                                    <span class="form-label">Name</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {{ form_widget(form.guests) }}
+                                    <span class="select-arrow"></span>
+                                    <span class="form-label">Guests</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {{ form_widget(form.children) }}
+                                    <span class="select-arrow"></span>
+                                    <span class="form-label">Children</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ form_widget(form.start) }}
+                                    <span class="form-label">Check In</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ form_widget(form.endReversed) }}
+                                    <span class="form-label">Check out</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {{ form_widget(form.statut) }}
+                                    <span class="form-label">Check out</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-btn">
+                                    <button class="submit-btn">{{ button_label|default('Check availability') }}</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+
+    <!-- footer section -->
+    <section class="container-fluid footer_section">
+        <p>
+            © 2023 All Rights Reserved By
+            <a href="https://miantsebastien.com/">miantsebastien.com</a>
+        </p>
+    </section>
+    <!-- footer section -->
+
+{% endblock %}

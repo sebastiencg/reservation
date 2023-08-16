@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}planning{% endblock %}
+    {% block stylesheets %}
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" />
+
+        <!-- fonts style -->
+        <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale:'fr',
+                    headerToolbar: {
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'timeGridWeek,timeGridDay,dayGridMonth',
+                    },
+                    events:
+                        {{ json|raw }}
+                });
+                calendar.render();
+            });
+
+        </script>
+    {% endblock %}
+
+{% block body %}
+    <div class="hero_area" style="height: 80px; margin-bottom: 20px">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                    <a class="navbar-brand" href="{{ path('app_home') }}">
+            <span>
+              MyHotel
+            </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                            <ul class="navbar-nav  ">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_home') }}"> Home </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_planning') }}">Planning</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+
+    </div>
+    <div class="container">
+        <div id='calendar'></div>
+
+    </div>
+    <!-- footer section -->
+    <section style="margin-top: 20px" class="container-fluid footer_section">
+        <p>
+            © 2023 All Rights Reserved By
+            <a href="https://miantsebastien.com/">miantsebastien.com</a>
+        </p>
+    </section>
+    <!-- footer section -->
+
+{% endblock %}

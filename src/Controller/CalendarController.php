@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Calendar;
+use App\Entity\Chambre;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,17 +23,27 @@ class CalendarController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_calendar_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{id}', name: 'app_calendar_new', methods: ['GET', 'POST'])]
+    public function new(Request $request,Chambre $chambre, EntityManagerInterface $entityManager): Response
     {
         $calendar = new Calendar();
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $chambresReservation=$chambre->getReservation();
+            foreach ($chambresReservation as  $value){
+                $messageErreur = "la chambre ".$chambre->getName()." est deja reserve a cette date";
+                if ($calendar->getStart()>=$value->getStart()&&$calendar->getStart()<$value->getEndReversed()){
+                    return new Response($messageErreur, Response::HTTP_BAD_REQUEST);
+                }
+                if ($calendar->getEndReversed()>=$value->getStart()&&$calendar->getEndReversed()<=$value->getEndReversed()){
+                    return new Response($messageErreur, Response::HTTP_BAD_REQUEST);
+                }
+            }
+            $calendar->setChambre($chambre);
             $entityManager->persist($calendar);
             $entityManager->flush();
-
             return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);
         }
 

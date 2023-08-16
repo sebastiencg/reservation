@@ -21,8 +21,8 @@
             <tr>
                 <td>{{ calendar.id }}</td>
                 <td>{{ calendar.title }}</td>
-                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ calendar.endReversed ? calendar.endReversed|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.start ? calendar.start|date('d/m/y H:i') : '' }}</td>
+                <td>{{ calendar.endReversed ? calendar.endReversed|date('d/m/y H:is') : '' }}</td>
                 <td>{{ calendar.statut }}</td>
                 <td>
                     <a href="{{ path('app_calendar_show', {'id': calendar.id}) }}">show</a>
@@ -37,5 +37,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_calendar_new') }}">Create new</a>
 {% endblock %}

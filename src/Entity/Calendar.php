@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CalendarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CalendarRepository::class)]
@@ -24,6 +26,20 @@ class Calendar
 
     #[ORM\Column(length: 255)]
     private ?string $statut = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservation')]
+    private ?Chambre $chambre = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $price = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $guests = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $children = null;
+
+
 
     public function getId(): ?int
     {
@@ -77,4 +93,54 @@ class Calendar
 
         return $this;
     }
+
+    public function getChambre(): ?Chambre
+    {
+        return $this->chambre;
+    }
+
+    public function setChambre(?Chambre $chambre): static
+    {
+        $this->chambre = $chambre;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): static
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getGuests(): ?int
+    {
+        return $this->guests;
+    }
+
+    public function setGuests(?int $guests): static
+    {
+        $this->guests = $guests;
+
+        return $this;
+    }
+
+    public function getChildren(): ?int
+    {
+        return $this->children;
+    }
+
+    public function setChildren(?int $children): static
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+
 }
